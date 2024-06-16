@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/materialCardViewFilledStyle"
+    android:layout_width="250dp"
+    android:layout_height="150dp"
+    android:layout_marginEnd="16dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp">
+
+    <ImageView
+        android:id="@+id/img_item_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/gambar"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_effect_black">
+
+        <!-- FrameLayout for the rating background and TextView -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rating_background"
+            android:layout_gravity="start|top">
+
+            <TextView
+                android:id="@+id/tv_item_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_gravity="center"
+                android:drawablePadding="4dp"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:fontFamily="@font/inter_semibold"
+                android:gravity="center_vertical"
+                app:drawableStartCompat="@drawable/ic_star_16"
+                tools:text="@string/rating"/>
+        </FrameLayout>
+
+        <!-- FrameLayout for the icon favorite background -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rating_background"
+            android:layout_gravity="end|top">
+
+            <ImageView
+                android:id="@+id/img_favorite_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_favorite_border"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/favorit" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:id="@+id/tv_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/wisata_name"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_item_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="8dp"
+                android:drawablePadding="8dp"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/inter_semibold"
+                android:gravity="center_vertical"
+                app:drawableStartCompat="@drawable/ic_maps16"
+                tools:text="@string/location" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</com.google.android.material.card.MaterialCardView>

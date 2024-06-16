@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.rizky.journeyonsolo.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_favorite"
+        android:name="com.rizky.journeyonsolo.ui.favorite.FavoriteFragment"
+        android:label="@string/title_favorite"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_navigation_favorite_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_maps"
+        android:name="com.rizky.journeyonsolo.ui.maps.MapsFragment"
+        android:label="@string/title_maps"
+        tools:layout="@layout/fragment_maps" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.rizky.journeyonsolo.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.rizky.journeyonsolo.ui.search.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" >
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue="default name" />
+        <action
+            android:id="@+id/action_searchResultFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.rizky.journeyonsolo.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="id"
+            app:argType="string"
+            android:defaultValue="default name" />
+        <action
+            android:id="@+id/action_detailFragment_to_detailMapsFragment"
+            app:destination="@id/detailMapsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailMapsFragment"
+        android:name="com.rizky.journeyonsolo.ui.maps.DetailMapsFragment"
+        android:label="fragment_detail_maps"
+        tools:layout="@layout/fragment_detail_maps" >
+        <argument
+            android:name="name"
+            android:defaultValue="default name"
+            app:argType="string" />
+        <argument
+            android:name="longitude"
+            app:argType="float"
+            android:defaultValue="0.0"/>
+        <argument
+            android:name="latitude"
+            app:argType="float"
+            android:defaultValue="0.0"/>
+    </fragment>
+
+</navigation>

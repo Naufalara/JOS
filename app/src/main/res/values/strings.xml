@@ -1,0 +1,112 @@
+<resources>
+    <string name="app_name">Journey On Solo</string>
+    <string name="title_home">Home</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="title_maps">Maps</string>
+    <string name="title_profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="wisata_name">Nama Wisata</string>
+    <string name="description">Description</string>
+    <string name="rating">4.5</string>
+    <string name="location">Solo, Indonesia</string>
+    <string name="searchbar_hint">Search destination…</string>
+    <string name="list_kosong_pencarian">Pencarian tidak ditemukan</string>
+    <string name="recommend_destination">Recommend Destination</string>
+    <string name="login_user">nama wisata</string>
+    <string name="gambar">Gambar Destinasi</string>
+    <string name="favorit">favorit</string>
+    <string name="nearby_destination">Nearby Destination</string>
+    <string name="button">Open Maps</string>
+
+    <string-array name="name_wisata">
+        <item>Air Terjun Jumog</item>
+        <item>Kampung Batik</item>
+        <item>Puro Mangkunegaran</item>
+        <item>Tumurun Private Museum</item>
+        <item>Taman Monumen 45 Banjarsari</item>
+        <item>De Tjolomadoe</item>
+        <item>Solo Safari</item>
+        <item>Solo Techno Park</item>
+        <item>Taman Cerdas</item>
+        <item>Masjid Raya Syeikh Zayed</item>
+    </string-array>
+
+    <string-array name="gambar">
+        <item>@drawable/air_terjun_jumog</item>
+        <item>@drawable/kampung_batik</item>
+        <item>@drawable/mangkunegaran</item>
+        <item>@drawable/tumurun</item>
+        <item>@drawable/banjarsari</item>
+        <item>@drawable/tjolomadoe</item>
+        <item>@drawable/solo_safari</item>
+        <item>@drawable/techno_park</item>
+        <item>@drawable/taman_cerdas</item>
+        <item>@drawable/masjid_raya</item>
+    </string-array>
+
+    <string-array name="location">
+        <item>Solo, Jawa Tengah</item>
+        <item>Solo, Jawa Tengah</item>
+        <item>Solo, Jawa Tengah</item>
+        <item>Solo, Jawa Tengah</item>
+        <item>Solo, Jawa Tengah</item>
+        <item>Solo, Jawa Tengah</item>
+        <item>Solo, Jawa Tengah</item>
+        <item>Solo, Jawa Tengah</item>
+        <item>Solo, Jawa Tengah</item>
+        <item>Solo, Jawa Tengah</item>
+    </string-array>
+
+    <string-array name="rating">
+        <item>4.0</item>
+        <item>4.6</item>
+        <item>4.5</item>
+        <item>4.6</item>
+        <item>4.7</item>
+        <item>4.3</item>
+        <item>4.0</item>
+        <item>4.5</item>
+        <item>4.6</item>
+        <item>4.7</item>
+    </string-array>
+
+    <string-array name="description">
+        <item>Air Terjun Jumog, sering disebut sebagai "Surga yang Tersembunyi", menawarkan keindahan alam yang memukau dengan aliran air yang jernih dan segar. Terletak di tengah hutan yang rimbun, air terjun ini memberikan suasana yang sejuk dan menyegarkan. Anda bisa menikmati suara gemericik air yang menenangkan sambil merasakan kesegaran alami di sekitar air terjun. Selain keindahan alamnya, Air Terjun Jumog juga memiliki legenda lokal yang menambah daya tariknya sebagai destinasi wisata yang kaya akan budaya dan sejarah.</item>
+        <item>Kampung Batik Kauman adalah tempat yang kaya akan sejarah dan budaya batik Solo. Terletak di dekat Keraton Surakarta, kampung ini telah menjadi pusat produksi batik sejak zaman kerajaan. Di sini, Anda dapat belajar tentang proses pembuatan batik tulis dan cap, serta melihat langsung para pengrajin batik bekerja. Kampung Batik Kauman juga menawarkan berbagai workshop dan tur edukatif yang memperkenalkan sejarah dan teknik batik kepada pengunjung. Dengan berbagai toko yang menjual batik berkualitas tinggi, kampung ini adalah destinasi ideal untuk para pecinta batik dan budaya Jawa.</item>
+        <item>Puro Mangkunegaran adalah istana megah yang menyimpan sejarah panjang Kesultanan Mangkunegaran di Solo. Didirikan pada abad ke-18 oleh Raden Mas Said, yang kemudian dikenal sebagai Mangkunegara I, istana ini menjadi pusat kebudayaan dan seni Jawa. Arsitektur bangunan ini mencerminkan keindahan dan kekayaan budaya Jawa, dengan berbagai ornamen dan ukiran yang menghiasi setiap sudutnya. Puro Mangkunegaran juga berfungsi sebagai museum yang menyimpan berbagai koleksi seni, kerajinan, dan artefak sejarah yang berharga. Mengunjungi tempat ini akan membawa Anda kembali ke masa lalu dan memberikan pemahaman mendalam tentang sejarah dan budaya Solo.</item>
+        <item>Tumurun Private Museum adalah museum pribadi yang menampilkan koleksi seni modern dan kontemporer dari Indonesia dan mancanegara. Didirikan oleh keluarga Hartono, museum ini menjadi tempat bagi para pecinta seni untuk menikmati karya-karya yang inovatif dan inspiratif. Dengan berbagai pameran dan program edukasi, Tumurun Private Museum berperan penting dalam mempromosikan seni dan budaya kepada masyarakat luas.</item>
+        <item>Taman Monumen 45 Banjarsari adalah monumen yang dibangun untuk memperingati perjuangan kemerdekaan Indonesia. Terletak di pusat kota Solo, monumen ini dikelilingi oleh taman yang indah, menjadikannya tempat yang ideal untuk mengenang jasa para pahlawan. Monumen ini juga sering menjadi lokasi upacara dan peringatan hari-hari besar nasional.</item>
+        <item>De Tjolomadoe adalah bekas pabrik gula yang dibangun pada tahun 1861 oleh pemerintah kolonial Belanda. Setelah direvitalisasi, tempat ini sekarang menjadi kompleks budaya dan pendidikan yang menarik, menawarkan museum yang menceritakan sejarah pabrik gula serta berbagai kegiatan kuliner dan hiburan. Dengan arsitektur yang memadukan gaya kolonial dan modern, De Tjolomadoe adalah destinasi unik yang memadukan sejarah, pendidikan, dan kesenangan.</item>
+        <item>Solo Safari adalah taman edukasi yang menggabungkan konsep kebun binatang dan taman rekreasi. Di sini, pengunjung bisa belajar tentang berbagai spesies hewan dari seluruh dunia dalam lingkungan yang aman dan terjaga. Selain itu, Solo Safari menawarkan berbagai program edukasi tentang konservasi dan perlindungan satwa, menjadikannya tempat yang ideal untuk kunjungan keluarga dan sekolah.</item>
+        <item>Solo Techno Park adalah pusat inovasi dan pendidikan teknologi yang didirikan untuk mendorong perkembangan ilmu pengetahuan dan teknologi di Solo. Didirikan pada tahun 2009, tempat ini menawarkan berbagai program pelatihan dan penelitian di bidang teknologi dan rekayasa. Solo Techno Park juga berfungsi sebagai inkubator bisnis bagi startup dan perusahaan teknologi, menjadikannya pusat penting bagi perkembangan industri teknologi di Solo.</item>
+        <item>Taman Cerdas adalah taman pendidikan yang dirancang untuk anak-anak dan keluarga. Didirikan pada tahun 2011, taman ini menawarkan berbagai fasilitas dan program edukatif yang interaktif dan menyenangkan, seperti area bermain, perpustakaan, dan ruang seni. Taman Cerdas bertujuan untuk mendukung perkembangan kognitif dan kreatif anak-anak dalam lingkungan yang aman dan mendidik.</item>
+        <item>Masjid Raya Syeikh Zayed adalah salah satu landmark keagamaan yang megah di Solo, didedikasikan untuk umat Muslim di kota ini. Dibangun pada tahun 2010 dengan gaya arsitektur modern dan tradisional, masjid ini menjadi pusat kegiatan keagamaan dan sosial bagi komunitas Muslim Solo. Nama "Syeikh Zayed" diambil dari nama presiden Uni Emirat Arab yang mendukung pembangunan masjid ini.</item>
+    </string-array>
+    
+    <string-array name="latitude">
+        <item>-7.6311048</item>
+        <item>-7.5734171</item>
+        <item>-7.5671112</item>
+        <item>-7.5704065</item>
+        <item>-7.5604092</item>
+        <item>-7.5341353</item>
+        <item>-7.564647</item>
+        <item>-7.5560692</item>
+        <item>-7.5539899</item>
+        <item>-7.5547331</item>
+    </string-array>
+
+    <string-array name="longitude">
+        <item>111.1245327</item>
+        <item>110.8263068</item>
+        <item>110.8227592</item>
+        <item>110.8163901</item>
+        <item>110.8264441</item>
+        <item>110.7499199</item>
+        <item>110.8585969</item>
+        <item>110.8538665</item>
+        <item>110.8532752</item>
+        <item>110.826713</item>
+    </string-array>
+</resources>
