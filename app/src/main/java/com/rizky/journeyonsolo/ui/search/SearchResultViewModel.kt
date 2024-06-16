@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rizky.journeyonsolo.data.DestinationRepository
 import com.rizky.journeyonsolo.data.Result
-import com.rizky.journeyonsolo.data.pref.Destination
 import com.rizky.journeyonsolo.data.remote.response.ListDestinationItem
 import kotlinx.coroutines.launch
 

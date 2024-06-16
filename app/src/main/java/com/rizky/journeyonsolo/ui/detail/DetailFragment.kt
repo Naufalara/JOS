@@ -1,19 +1,17 @@
 package com.rizky.journeyonsolo.ui.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.rizky.journeyonsolo.data.Result
-import com.rizky.journeyonsolo.data.pref.Destination
 import com.rizky.journeyonsolo.databinding.FragmentDetailBinding
 import com.rizky.journeyonsolo.ui.ViewModelFactory
-import com.rizky.journeyonsolo.ui.home.HomeViewModel
 
 class DetailFragment : Fragment() {
 
