@@ -1,18 +1,12 @@
 package com.rizky.journeyonsolo.data
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.liveData
 import com.google.gson.Gson
-import com.rizky.journeyonsolo.R
-import com.rizky.journeyonsolo.data.pref.Destination
-import com.rizky.journeyonsolo.data.pref.DestinationLocations
 import com.rizky.journeyonsolo.data.remote.response.ListDestinationItem
 import com.rizky.journeyonsolo.data.remote.retrofit.ApiService
 import retrofit2.HttpException
-import com.rizky.journeyonsolo.data.Result
-import com.rizky.journeyonsolo.data.remote.response.DestinationResponse
 import com.rizky.journeyonsolo.data.remote.response.DetailErrorResponse
 
 class DestinationRepository(private val apiService: ApiService) {

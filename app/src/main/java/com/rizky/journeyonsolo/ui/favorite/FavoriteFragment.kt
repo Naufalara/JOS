@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.rizky.journeyonsolo.adapter.FavDestinationAdapter
 import com.rizky.journeyonsolo.data.Result
-import com.rizky.journeyonsolo.data.pref.Destination
 import com.rizky.journeyonsolo.data.remote.response.ListDestinationItem
 import com.rizky.journeyonsolo.databinding.FragmentFavoriteBinding
 import com.rizky.journeyonsolo.ui.ViewModelFactory

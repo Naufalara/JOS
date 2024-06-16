@@ -1,10 +1,9 @@
 package com.rizky.journeyonsolo.ui
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.rizky.journeyonsolo.data.di.Injection
 import com.rizky.journeyonsolo.data.DestinationRepository
+import com.rizky.journeyonsolo.data.di.Injection
 import com.rizky.journeyonsolo.ui.detail.DetailViewModel
 import com.rizky.journeyonsolo.ui.favorite.FavoriteViewModel
 import com.rizky.journeyonsolo.ui.home.HomeViewModel

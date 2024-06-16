@@ -1,6 +1,5 @@
 package com.rizky.journeyonsolo.data.di
 
-import android.content.Context
 import com.rizky.journeyonsolo.data.DestinationRepository
 import com.rizky.journeyonsolo.data.remote.retrofit.ApiConfig
 
