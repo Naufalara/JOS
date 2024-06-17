@@ -28,7 +28,7 @@ data class DetailDestinationResponse(
 	@field:SerializedName("lat")
 	val lat: String,
 
-	@field:SerializedName("lon")
+	@field:SerializedName("long")
 	val lon: String,
 
 	@field:SerializedName("caption_idn")

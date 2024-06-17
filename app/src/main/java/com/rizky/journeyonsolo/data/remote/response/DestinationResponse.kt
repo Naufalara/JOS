@@ -34,7 +34,7 @@ data class ListDestinationItem(
 	@field:SerializedName("lat")
 	val lat: Float,
 
-	@field:SerializedName("lon")
+	@field:SerializedName("long")
 	val lon: Float,
 
 	@field:SerializedName("caption_idn")

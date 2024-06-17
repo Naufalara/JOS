@@ -15,7 +15,7 @@ class DestinationRepository(private val apiService: ApiService) {
         emit(Result.Loading)
         try {
             val response = apiService.getDestinations()
-            emit(Result.Success(response.listDestination))
+            emit(Result.Success(response))
         } catch (e: HttpException) {
             val jsonString = e.response()?.errorBody()?.string()
             Log.d(TAG, "DestinationRepository: $jsonString")
