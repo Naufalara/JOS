@@ -57,37 +57,38 @@ class HomeFragment : Fragment() {
         getSearch()
     }
 
-
     private fun getDataFirst() {
         viewModel.getData().observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Loading -> showLoading(true)
-                is Result.Success -> {
-                    showLoading(false)
-                    val newData = result.data
-                    Log.d(TAG, "Cek data, $newData")
-                    if (newData.isNotEmpty()) {
-                        showDataNull(false)
-                        setListDestination(newData)
-                    } else {
-                        setListDestination(emptyList())
-                        showDataNull(true)
+            if (result != null) {
+                when (result) {
+                    is Result.Loading -> {
+                        showLoading(true)
+                    }
+                    is Result.Success -> {
+                        showLoading(false)
+                        val newData = result.data
+                        Log.d(TAG, "Cek data, $newData")
+                        if (newData.isNotEmpty()) {
+                            showDataNull(false)
+                            setListDestination(newData)
+                        } else {
+                            setListDestination(emptyList())
+                            showDataNull(true)
+                        }
+                    }
+                    is Result.Error -> {
+                        showLoading(false)
+                        Toast.makeText(
+                            requireContext(),
+                            "Terjadi Kesalahan " + result.error,
+                            Toast.LENGTH_SHORT).
+                        show()
                     }
                 }
-
-                is Result.Error -> {
-                    showLoading(false)
-                    Toast.makeText(
-                        requireContext(),
-                        "Terjadi kesalahan: ${result.error}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    Log.e("Home Fragment", result.error.toString())
-                }
             }
+
         }
     }
-
 
     private fun getSearch() {
         this.searchView.setupWithSearchBar(this.searchBar)

@@ -47,7 +47,7 @@ class DetailFragment : Fragment() {
 
                     binding.tvItemName.text = newData.name
                     Glide.with(requireContext())
-                        .load(newData.imageUrl)
+                        .load("http://" + newData.imageUrl)
                         .into(binding.imgItemPhoto)
                     binding.tvItemLocation.text = newData.address
                     binding.tvItemRating.text = newData.rating
@@ -78,10 +78,6 @@ class DetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        const val EXTRA_ID = "extra_id"
     }
 
 }
