@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
-                R.id.searchResultFragment, R.id.detailFragment -> {
+                R.id.searchResultFragment, R.id.detailFragment, R.id.detailMapsFragment -> {
                     navView.visibility = View.GONE
                 } else -> navView.visibility = View.VISIBLE
             }
