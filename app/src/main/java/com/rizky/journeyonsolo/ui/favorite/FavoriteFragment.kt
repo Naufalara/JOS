@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.rizky.journeyonsolo.adapter.FavDestinationAdapter
-import com.rizky.journeyonsolo.data.Result
-import com.rizky.journeyonsolo.data.remote.response.ListDestinationItem
+import com.rizky.journeyonsolo.data.local.entity.FavoriteDestination
 import com.rizky.journeyonsolo.databinding.FragmentFavoriteBinding
 import com.rizky.journeyonsolo.ui.ViewModelFactory
 
@@ -19,7 +17,7 @@ class FavoriteFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<FavoriteViewModel> {
-        ViewModelFactory.getInstance()
+        ViewModelFactory.getInstance(requireContext())
     }
 
     private val favDestinationAdapter = FavDestinationAdapter()
@@ -41,28 +39,15 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun getDataFirst() {
-        viewModel.getData().observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Loading -> showLoading(true)
-                is Result.Success -> {
-                    showLoading(false)
-                    val newData = result.data
-                    if (newData.isNotEmpty()) {
-                        showDataNull(false)
-                        setListDestination(newData)
-                    } else {
-                        setListDestination(emptyList())
-                        showDataNull(true)
-                    }
-                }
-                is Result.Error -> {
-                    showLoading(false)
-                    Toast.makeText(
-                        requireContext(),
-                        "Terjadi kesalahan: ${result.error}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+
+        viewModel.getFavDestination().observe(viewLifecycleOwner){
+            showLoading(true)
+            if (it.isNotEmpty()){
+                showLoading(false)
+                setListDestination(it)
+            } else{
+                showLoading(false)
+                setListDestination(it)
             }
         }
     }
@@ -81,8 +66,9 @@ class FavoriteFragment : Fragment() {
         binding.tvListKosong.visibility = if (isDataNull) View.VISIBLE else View.GONE
     }
 
-    private fun setListDestination(newData: List<ListDestinationItem>) {
-       favDestinationAdapter.submitList(newData)
+    private fun setListDestination(listFavDestination: List<FavoriteDestination>) {
+        favDestinationAdapter.submitList(listFavDestination)
+        showDataNull(listFavDestination.isEmpty())
     }
 
     override fun onDestroyView() {

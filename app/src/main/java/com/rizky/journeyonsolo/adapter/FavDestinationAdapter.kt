@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.rizky.journeyonsolo.data.remote.response.ListDestinationItem
-import com.rizky.journeyonsolo.databinding.ItemRowWisataBinding
+import com.rizky.journeyonsolo.data.local.entity.FavoriteDestination
+import com.rizky.journeyonsolo.databinding.ItemFavWisataBinding
 import com.rizky.journeyonsolo.ui.favorite.FavoriteFragmentDirections
 
-class FavDestinationAdapter: ListAdapter<ListDestinationItem, FavDestinationAdapter.MyViewHolder>(DIFF_CALLBACK) {
-    class MyViewHolder(private val binding: ItemRowWisataBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(destination: ListDestinationItem) {
+class FavDestinationAdapter: ListAdapter<FavoriteDestination, FavDestinationAdapter.MyViewHolder>(DIFF_CALLBACK) {
+    class MyViewHolder(private val binding: ItemFavWisataBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(destination: FavoriteDestination) {
             binding.apply {
                 tvItemName.text = destination.name
                 tvItemLocation.text = destination.address
@@ -26,7 +26,7 @@ class FavDestinationAdapter: ListAdapter<ListDestinationItem, FavDestinationAdap
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = ItemRowWisataBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemFavWisataBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding)
     }
 
@@ -42,12 +42,12 @@ class FavDestinationAdapter: ListAdapter<ListDestinationItem, FavDestinationAdap
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListDestinationItem>() {
-            override fun areItemsTheSame(oldItem: ListDestinationItem, newItem: ListDestinationItem): Boolean {
-                return oldItem.name == newItem.name
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FavoriteDestination>() {
+            override fun areItemsTheSame(oldItem: FavoriteDestination, newItem: FavoriteDestination): Boolean {
+                return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: ListDestinationItem, newItem: ListDestinationItem): Boolean {
+            override fun areContentsTheSame(oldItem: FavoriteDestination, newItem: FavoriteDestination): Boolean {
                 return oldItem == newItem
             }
         }

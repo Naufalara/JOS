@@ -15,9 +15,11 @@
     <string name="recommend_destination">Recommend Destination</string>
     <string name="login_user">nama wisata</string>
     <string name="gambar">Gambar Destinasi</string>
-    <string name="favorit">favorit</string>
+    <string name="favorit">Favorit</string>
     <string name="nearby_destination">Nearby Destination</string>
     <string name="button">Open Maps</string>
+    <string name="list_favorite_kosong">Daftar Wisata Favorite Kosong</string>
+    <string name="back">Back</string>
 
     <string-array name="name_wisata">
         <item>Air Terjun Jumog</item>

@@ -38,14 +38,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_row_wisata" />
+            tools:listitem="@layout/item_fav_wisata" />
 
         <TextView
             android:id="@+id/tvListKosong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="350dp"
-            android:text="@string/list_kosong_pencarian"
+            android:text="@string/list_favorite_kosong"
             android:textStyle="italic"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
