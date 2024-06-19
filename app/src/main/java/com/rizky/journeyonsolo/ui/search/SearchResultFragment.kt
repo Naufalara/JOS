@@ -24,7 +24,7 @@ class SearchResultFragment : Fragment() {
     private lateinit var searchView: SearchView
 
     private val viewModel by viewModels<SearchResultViewModel> {
-        ViewModelFactory.getInstance()
+        ViewModelFactory.getInstance(requireContext())
     }
 
     private val destinationAdapter = DestinationAdapter()

@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
     private lateinit var searchView: SearchView
 
     private val viewModel by viewModels<HomeViewModel> {
-        ViewModelFactory.getInstance()
+        ViewModelFactory.getInstance(requireContext())
     }
 
     private val recommendDestinationAdapter = RecommendDestinationAdapter()

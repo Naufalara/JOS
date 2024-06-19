@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
+import com.rizky.journeyonsolo.R
 import com.rizky.journeyonsolo.data.Result
+import com.rizky.journeyonsolo.data.local.entity.FavoriteDestination
 import com.rizky.journeyonsolo.databinding.FragmentDetailBinding
 import com.rizky.journeyonsolo.ui.ViewModelFactory
 
@@ -18,8 +20,10 @@ class DetailFragment : Fragment() {
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
 
+    private val dataEntity = FavoriteDestination()
+
     private val viewModel by viewModels<DetailViewModel> {
-        ViewModelFactory.getInstance()
+        ViewModelFactory.getInstance(requireContext())
     }
 
     override fun onCreateView(
@@ -35,19 +39,28 @@ class DetailFragment : Fragment() {
 
         val id = DetailFragmentArgs.fromBundle(arguments as Bundle).id
 
+        binding.btnBack.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
         viewModel.getData(id).observe(viewLifecycleOwner) {result->
             when(result) {
                 is Result.Loading -> {
                     showLoading(true)
                 }
-
                 is Result.Success -> {
                     showLoading(false)
                     val newData = result.data
 
+                    dataEntity.placeId = newData.placeId
+                    dataEntity.name = newData.name
+                    dataEntity.imageUrl = newData.imageUrl
+                    dataEntity.address = newData.address
+                    dataEntity.rating = newData.rating
+
                     binding.tvItemName.text = newData.name
                     Glide.with(requireContext())
-                        .load("http://" + newData.imageUrl)
+                        .load(newData.imageUrl)
                         .into(binding.imgItemPhoto)
                     binding.tvItemLocation.text = newData.address
                     binding.tvItemRating.text = newData.rating
@@ -66,6 +79,20 @@ class DetailFragment : Fragment() {
                     showLoading(false)
                     Toast.makeText(requireContext(), "Terjadi Kesalahan " + result.error, Toast.LENGTH_SHORT)
                         .show()
+                }
+            }
+        }
+
+        viewModel.getIsFavorite(id).observe(viewLifecycleOwner) { isFavorite ->
+            if (isFavorite) {
+                binding.btnFavorite.setImageResource(R.drawable.ic_favorite_full)
+                binding.btnFavorite.setOnClickListener {
+                    viewModel.deleteFavoriteDestination(dataEntity)
+                }
+            } else {
+                binding.btnFavorite.setImageResource(R.drawable.ic_favorite_border)
+                binding.btnFavorite.setOnClickListener {
+                    viewModel.insertFavoriteDestination(dataEntity)
                 }
             }
         }

@@ -2,15 +2,23 @@ package com.rizky.journeyonsolo.data
 
 import android.annotation.SuppressLint
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.google.gson.Gson
+import com.rizky.journeyonsolo.data.local.entity.FavoriteDestination
+import com.rizky.journeyonsolo.data.local.room.DestinationDao
 import com.rizky.journeyonsolo.data.remote.response.ListDestinationItem
 import com.rizky.journeyonsolo.data.remote.retrofit.ApiService
 import retrofit2.HttpException
 import com.rizky.journeyonsolo.data.remote.response.DetailErrorResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
-class DestinationRepository(private val apiService: ApiService) {
-
+class DestinationRepository(
+    private val apiService: ApiService,
+    private val destinationDao: DestinationDao
+) {
     fun getAllDestination() = liveData {
         emit(Result.Loading)
         try {
@@ -46,6 +54,28 @@ class DestinationRepository(private val apiService: ApiService) {
         return emptyList()
     }
 
+    fun getFavoriteDestination(): LiveData<List<FavoriteDestination>> {
+        return destinationDao.getFavoriteDestination()
+    }
+
+    suspend fun setInsertFavoriteDestination(destination: FavoriteDestination){
+        coroutineScope {
+            launch(Dispatchers.IO){
+                destinationDao.insert(destination)
+            }
+        }
+    }
+
+    suspend fun delete(destination: FavoriteDestination){
+        coroutineScope {
+            launch(Dispatchers.IO){
+                destinationDao.delete(destination)
+            }
+        }
+    }
+
+    fun getIsFavorite(id: String): LiveData<Boolean> = destinationDao.isFavoriteDestination(id)
+
     companion object {
 
         private const val TAG = "DestinationRepository"
@@ -53,13 +83,12 @@ class DestinationRepository(private val apiService: ApiService) {
         @SuppressLint("StaticFieldLeak")
         private var instance: DestinationRepository? = null
         fun getInstance(
-            apiService: ApiService
-        ): DestinationRepository? {
-            synchronized(this) {
-                instance = DestinationRepository(apiService)
-            }
-            return instance
-        }
+            apiService: ApiService,
+            destinationDao: DestinationDao
+        ): DestinationRepository =
+            instance ?: synchronized(this){
+                instance ?: DestinationRepository(apiService, destinationDao)
+            }.also { instance = it }
     }
 
 }

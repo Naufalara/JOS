@@ -1,5 +1,6 @@
 package com.rizky.journeyonsolo.ui
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.rizky.journeyonsolo.data.DestinationRepository
@@ -40,11 +41,9 @@ class ViewModelFactory(private val repository: DestinationRepository) :
         private var instance: ViewModelFactory? = null
 
         @JvmStatic
-        fun getInstance(): ViewModelFactory {
-            synchronized(this) {
-                instance = Injection.provideRepository()?.let { ViewModelFactory(it) }
-            }
-            return instance as ViewModelFactory
-        }
+        fun getInstance(context: Context): ViewModelFactory =
+            instance ?: synchronized(this){
+                instance ?: ViewModelFactory(Injection.provideRepository(context))
+            }. also { instance = it }
     }
 }
