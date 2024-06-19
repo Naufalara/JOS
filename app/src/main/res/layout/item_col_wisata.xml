@@ -60,7 +60,6 @@
                 android:layout_gravity="center"
                 android:contentDescription="@string/favorit"
                 android:padding="4dp"
-                android:src="@drawable/ic_favorite_border"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </FrameLayout>

@@ -30,15 +30,6 @@
             android:contentDescription="@string/gambar"
             tools:src="@tools:sample/backgrounds/scenic" />
 
-        <ImageView
-            android:id="@+id/img_favorite_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_favorite_border"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/tv_item_name"
             android:layout_width="0dp"
@@ -47,9 +38,6 @@
             android:layout_marginEnd="8dp"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:maxLines="1"
-            android:ellipsize="end"
-            card_view:layout_constraintEnd_toStartOf="@+id/img_favorite_icon"
             card_view:layout_constraintStart_toEndOf="@+id/img_item_photo"
             card_view:layout_constraintTop_toTopOf="@+id/img_item_photo"
             tools:text="@string/wisata_name" />
@@ -66,14 +54,17 @@
 
         <TextView
             android:id="@+id/tv_item_location"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:textSize="12sp"
             tools:text="@string/location"
             app:layout_constraintBottom_toBottomOf="@+id/img_maps_icon"
             app:layout_constraintStart_toEndOf="@+id/img_maps_icon"
-            app:layout_constraintTop_toTopOf="@+id/img_maps_icon" />
+            app:layout_constraintTop_toTopOf="@+id/img_maps_icon"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <ImageView
             android:id="@+id/img_star_icon"
