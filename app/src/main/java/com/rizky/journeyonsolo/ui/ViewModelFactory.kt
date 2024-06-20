@@ -8,7 +8,11 @@ import com.rizky.journeyonsolo.data.di.Injection
 import com.rizky.journeyonsolo.ui.detail.DetailViewModel
 import com.rizky.journeyonsolo.ui.favorite.FavoriteViewModel
 import com.rizky.journeyonsolo.ui.home.HomeViewModel
+import com.rizky.journeyonsolo.ui.login.LoginViewModel
 import com.rizky.journeyonsolo.ui.maps.MapsViewModel
+import com.rizky.journeyonsolo.ui.onboarding.OnBoardingViewModel
+import com.rizky.journeyonsolo.ui.profile.ProfileViewModel
+import com.rizky.journeyonsolo.ui.register.RegisterViewModel
 import com.rizky.journeyonsolo.ui.search.SearchResultViewModel
 
 class ViewModelFactory(private val repository: DestinationRepository) :
@@ -17,6 +21,12 @@ class ViewModelFactory(private val repository: DestinationRepository) :
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when{
+            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
+                RegisterViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                LoginViewModel(repository) as T
+            }
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(repository) as T
             }
@@ -31,6 +41,12 @@ class ViewModelFactory(private val repository: DestinationRepository) :
             }
             modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
                 MapsViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(OnBoardingViewModel::class.java) -> {
+                OnBoardingViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

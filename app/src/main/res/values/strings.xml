@@ -20,6 +20,45 @@
     <string name="button">Open Maps</string>
     <string name="list_favorite_kosong">Daftar Wisata Favorite Kosong</string>
     <string name="back">Back</string>
+    <string name="register">Register</string>
+    <string name="name_input">Name</string>
+    <string name="error_input_email">Invalid email format</string>
+    <string name="error_input_name">Name must be at least 3 characters long</string>
+    <string name="error_input_password">Password must be at least 8 characters long</string>
+    <string name="email_input">Email</string>
+    <string name="password_input">Password</string>
+    <string name="login">Login</string>
+    <string name="or">Or</string>
+    <string name="ok">OK</string>
+    <string name="failed_register">Registration Failed!</string>
+    <string name="dialog_failed_register">Registration failed. Please check your inputs and try again.</string>
+    <string name="email_is_already_taken">The email address is already in use by another account.</string>
+    <string name="success_register">Register successful</string>
+    <string name="dialog_success_register">Account with email %1$s successfully registered, please proceed to Log In</string>
+    <string name="failed_login">Login failed, try again.</string>
+    <string name="invalid_password">The password invalid, try again.</string>
+    <string name="dialog_failed_login">Login failed. Please check your inputs and try again.</string>
+    <string name="success_login">Login Success</string>
+    <string name="dialog_success_login">You have successfully logged in</string>
+    <string name="profile">Profile</string>
+    <string name="nama_profile">Profile Name</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="setting_language">Change Language</string>
+    <string name="exit">Exit</string>
+    <string name="logout">Logout</string>
+    <string name="logout_description">Do you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="berhasil_logout">Logout successful</string>
+    <string name="no">No</string>
+    <string name="title_menu_1">Capture Moments</string>
+    <string name="title_menu_2">Your Story</string>
+    <string name="title_menu_3">Like and Appreciated</string>
+    <string name="desc_menu_1">Share your special moments through a simple and engaging photo posting feature</string>
+    <string name="desc_menu_2">Explore and share your stories to connect with more friends</string>
+    <string name="desc_menu_3">Like inspiring stories and feel the warmth of the community</string>
+    <string name="title_menu_4">Complete Social Interaction</string>
+    <string name="desc_menu_4">More than just posting. Experience closeness with the community through social interactions—likes and comments that bring your story to life</string>
+    <string name="btn_gabung">Get Started</string>
 
     <string-array name="name_wisata">
         <item>Air Terjun Jumog</item>
@@ -85,7 +124,7 @@
         <item>Taman Cerdas adalah taman pendidikan yang dirancang untuk anak-anak dan keluarga. Didirikan pada tahun 2011, taman ini menawarkan berbagai fasilitas dan program edukatif yang interaktif dan menyenangkan, seperti area bermain, perpustakaan, dan ruang seni. Taman Cerdas bertujuan untuk mendukung perkembangan kognitif dan kreatif anak-anak dalam lingkungan yang aman dan mendidik.</item>
         <item>Masjid Raya Syeikh Zayed adalah salah satu landmark keagamaan yang megah di Solo, didedikasikan untuk umat Muslim di kota ini. Dibangun pada tahun 2010 dengan gaya arsitektur modern dan tradisional, masjid ini menjadi pusat kegiatan keagamaan dan sosial bagi komunitas Muslim Solo. Nama "Syeikh Zayed" diambil dari nama presiden Uni Emirat Arab yang mendukung pembangunan masjid ini.</item>
     </string-array>
-    
+
     <string-array name="latitude">
         <item>-7.6311048</item>
         <item>-7.5734171</item>
