@@ -1,14 +1,32 @@
 package com.rizky.journeyonsolo.ui.profile
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
+import com.rizky.journeyonsolo.data.DestinationRepository
+import com.rizky.journeyonsolo.data.pref.UserModel
+import kotlinx.coroutines.launch
 
-class ProfileViewModel : ViewModel() {
+class ProfileViewModel (private val destinationRepository: DestinationRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is profile Fragment"
+    fun getSession(): LiveData<UserModel> {
+        return destinationRepository.getSession().asLiveData()
     }
-    val text: LiveData<String> = _text
 
+    fun getThemeSetting(): LiveData<Boolean>{
+        return destinationRepository.getThemeSetting().asLiveData()
+    }
+
+    fun saveThemeSetting(isDarkModeActive: Boolean){
+        viewModelScope.launch {
+            destinationRepository.saveThemeSetting(isDarkModeActive)
+        }
+    }
+
+    fun logout(){
+        viewModelScope.launch {
+            destinationRepository.logout()
+        }
+    }
 }

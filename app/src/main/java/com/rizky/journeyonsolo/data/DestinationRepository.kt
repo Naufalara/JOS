@@ -9,16 +9,72 @@ import com.rizky.journeyonsolo.data.local.entity.FavoriteDestination
 import com.rizky.journeyonsolo.data.local.room.DestinationDao
 import com.rizky.journeyonsolo.data.remote.response.ListDestinationItem
 import com.rizky.journeyonsolo.data.remote.retrofit.ApiService
+import com.rizky.journeyonsolo.data.pref.UserModel
+import com.rizky.journeyonsolo.data.pref.UserPreference
 import retrofit2.HttpException
 import com.rizky.journeyonsolo.data.remote.response.DetailErrorResponse
+import com.rizky.journeyonsolo.data.remote.response.LoginErrorResponse
+import com.rizky.journeyonsolo.data.remote.response.RegisterResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class DestinationRepository(
     private val apiService: ApiService,
+    private val userPreference: UserPreference,
     private val destinationDao: DestinationDao
 ) {
+
+    fun registerUser(username: String, email: String, password: String) = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.register(username, email, password)
+            emit(Result.Success(response))
+        } catch (e: HttpException) {
+            val jsonString = e.response()?.errorBody()?.string()
+            Log.d(TAG, "DestinationRepository: $jsonString")
+            val errorBody = Gson().fromJson(jsonString, RegisterResponse::class.java)
+            val errorMessage = errorBody.message
+            emit(Result.Error(errorMessage))
+        } catch (e: Exception) {
+            emit(Result.Error("Lost Connection"))
+        }
+    }
+
+    fun loginUser(email: String, password: String) = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.login(email, password)
+            Log.d("LoginUser", "Response: $response")
+            emit(Result.Success(response))
+        } catch (e: HttpException) {
+            val jsonString = e.response()?.errorBody()?.string()
+            Log.d("LoginUser", "HttpException: $jsonString")
+            Log.d(TAG, "DestinationRepository: $jsonString")
+            val errorBody = Gson().fromJson(jsonString, LoginErrorResponse::class.java)
+            val errorMessage = errorBody.detail.message
+            emit(Result.Error(errorMessage))
+        } catch (e: Exception) {
+            emit(Result.Error("Lost Connection"))
+        }
+    }
+
+    suspend fun saveSession(userModel: UserModel) = userPreference.saveSession(userModel)
+
+    fun getSession(): Flow<UserModel> {
+        return userPreference.getSession()
+    }
+
+    suspend fun logout() = userPreference.logout()
+
+    fun getThemeSetting(): Flow<Boolean> {
+        return userPreference.getThemeSetting()
+    }
+
+    suspend fun saveThemeSetting(isDarkModeActive: Boolean) =
+        userPreference.saveThemeSetting(isDarkModeActive)
+
     fun getAllDestination() = liveData {
         emit(Result.Loading)
         try {
@@ -84,10 +140,11 @@ class DestinationRepository(
         private var instance: DestinationRepository? = null
         fun getInstance(
             apiService: ApiService,
+            userPreference: UserPreference,
             destinationDao: DestinationDao
         ): DestinationRepository =
             instance ?: synchronized(this){
-                instance ?: DestinationRepository(apiService, destinationDao)
+                instance ?: DestinationRepository(apiService, userPreference, destinationDao)
             }.also { instance = it }
     }
 

@@ -19,22 +19,36 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+
         val navView: BottomNavigationView = binding.navView
-//        supportActionBar?.show()
         val navController = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment).navController
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+        // Check login status and navigate accordingly
+        if (isUserLoggedIn()) {
+            navController.navigate(R.id.navigation_home)
+        } else {
+            navController.navigate(R.id.loginFragment)
+        }
+
         navView.setupWithNavController(navController)
 
         val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
-                R.id.searchResultFragment, R.id.detailFragment, R.id.detailMapsFragment -> {
+                R.id.searchResultFragment,
+                R.id.detailFragment,
+                R.id.detailMapsFragment,
+                R.id.registerFragment,
+                R.id.loginFragment -> {
                     navView.visibility = View.GONE
                 } else -> navView.visibility = View.VISIBLE
             }
         }
 
         navController.addOnDestinationChangedListener(listener)
+    }
 
+    private fun isUserLoggedIn(): Boolean {
+        // Replace with your actual login check logic
+        return false
     }
 }

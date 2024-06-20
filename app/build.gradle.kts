@@ -69,6 +69,7 @@ dependencies {
     // view model
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     // room
     implementation("androidx.room:room-ktx:2.6.1")
