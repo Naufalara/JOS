@@ -54,6 +54,10 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
         mapFragment?.getMapAsync(this)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+        binding.btnBack.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -129,7 +133,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun getAllDestinationsLocation(){
-        viewModel.getLocationDestination().observe(viewLifecycleOwner){ result ->
+        viewModel.getAllDestinationLocation().observe(viewLifecycleOwner){ result ->
             if (result!=null){
                 when(result){
                     is Result.Success -> {

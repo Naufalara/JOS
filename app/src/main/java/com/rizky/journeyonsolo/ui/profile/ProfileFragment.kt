@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.rizky.journeyonsolo.R
 import com.rizky.journeyonsolo.databinding.FragmentProfileBinding
@@ -41,19 +43,20 @@ class ProfileFragment : Fragment() {
             user?.let {
                 binding.nameProfile.text = user.username
                 if (!it.isLogin){
-                    val intent = Intent(this, OnBoardingActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    finish()
+                    val toOnBoardingFragment = ProfileFragmentDirections.actionNavigationProfileToOnBoardingFragment()
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.mobile_navigation, true)
+                        .build()
+                    view.findNavController().navigate(toOnBoardingFragment, navOptions)
                 }
             }
         }
 
-        setUpAction()
+        setUpAction(view)
         setUpTheme()
     }
 
-    private fun setUpAction(){
+    private fun setUpAction(view: View){
         binding.topAppBar.setNavigationOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
@@ -64,8 +67,12 @@ class ProfileFragment : Fragment() {
                 .setMessage(resources.getString(R.string.logout_description))
                 .setPositiveButton(resources.getString(R.string.yes)){ _, _ ->
                     viewModel.logout()
-                    Toast.makeText(this, resources.getString(R.string.berhasil_logout), Toast.LENGTH_SHORT).show()
-                    finish()
+                    Toast.makeText(requireContext(), resources.getString(R.string.logout_successful), Toast.LENGTH_SHORT).show()
+                    val toOnBoardingFragment = ProfileFragmentDirections.actionNavigationProfileToOnBoardingFragment()
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.mobile_navigation, true)
+                        .build()
+                    view.findNavController().navigate(toOnBoardingFragment, navOptions)
                 }
                 .setNegativeButton(resources.getString(R.string.no)){_,_ ->
                 }
@@ -91,7 +98,7 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        binding.switchTheme?.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+        binding.switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             viewModel.saveThemeSetting(isChecked)
         }
     }
