@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.google.android.material.search.SearchBar
 import com.google.android.material.search.SearchView
+import com.rizky.journeyonsolo.R
 import com.rizky.journeyonsolo.data.Result
 import com.rizky.journeyonsolo.adapter.NearbyDestinationAdapter
 import com.rizky.journeyonsolo.adapter.RecommendDestinationAdapter
@@ -47,6 +49,18 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getSession().observe(viewLifecycleOwner){user ->
+            user?.let {
+                if (!it.isLogin){
+                    val toOnBoardingFragment = HomeFragmentDirections.actionNavigationHomeToOnBoardingFragment()
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.mobile_navigation, true)
+                        .build()
+                    view.findNavController().navigate(toOnBoardingFragment, navOptions)
+                }
+            }
+        }
 
         // Initialize the SearchBar and SearchView
         searchBar = binding.searchBar
@@ -103,11 +117,6 @@ class HomeFragment : Fragment() {
             }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun setupUI() {
         binding.apply {
             searchView.setupWithSearchBar(searchBar)
@@ -132,5 +141,10 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         searchView.hide()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

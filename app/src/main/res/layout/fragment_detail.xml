@@ -35,7 +35,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     tools:src="@tools:sample/backgrounds/scenic"
-                    android:contentDescription="@string/gambar" />
+                    android:contentDescription="@string/image" />
 
                 <ImageButton
                     android:id="@+id/btn_back"
@@ -54,7 +54,7 @@
                     android:layout_height="48dp"
                     android:layout_gravity="end|top"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@string/favorit"
+                    android:contentDescription="@string/favorite"
                     app:srcCompat="@drawable/ic_favorite_border"
                     android:padding="8dp"
                     android:layout_margin="8dp" />
@@ -77,7 +77,7 @@
                     android:textSize="24sp"
                     android:textColor="@color/md_theme_onSurface"
                     android:fontFamily="@font/inter_semibold"
-                    tools:text="@string/wisata_name"/>
+                    tools:text="@string/destination"/>
 
                 <TextView
                     android:id="@+id/tv_item_location"
@@ -133,7 +133,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginBottom="16dp"
                     android:layout_gravity="bottom"
-                    android:text="@string/button"
+                    android:text="@string/button_maps"
                     android:textColor="@color/md_theme_onSurface"
                     android:textStyle="bold"/>
 

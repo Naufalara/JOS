@@ -7,14 +7,15 @@ import androidx.lifecycle.liveData
 import com.google.gson.Gson
 import com.rizky.journeyonsolo.data.local.entity.FavoriteDestination
 import com.rizky.journeyonsolo.data.local.room.DestinationDao
+import com.rizky.journeyonsolo.data.pref.LoginBodyRequest
+import com.rizky.journeyonsolo.data.pref.RegisterBodyRequest
 import com.rizky.journeyonsolo.data.remote.response.ListDestinationItem
 import com.rizky.journeyonsolo.data.remote.retrofit.ApiService
 import com.rizky.journeyonsolo.data.pref.UserModel
-import com.rizky.journeyonsolo.data.pref.UserPreference
+import com.rizky.journeyonsolo.data.pref.Session
 import retrofit2.HttpException
-import com.rizky.journeyonsolo.data.remote.response.DetailErrorResponse
-import com.rizky.journeyonsolo.data.remote.response.LoginErrorResponse
-import com.rizky.journeyonsolo.data.remote.response.RegisterResponse
+import com.rizky.journeyonsolo.data.remote.response.DestinationDetailErrorResponse
+import com.rizky.journeyonsolo.data.remote.response.ErrorLoginRegisterResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -22,20 +23,21 @@ import kotlinx.coroutines.launch
 
 class DestinationRepository(
     private val apiService: ApiService,
-    private val userPreference: UserPreference,
+    private val session: Session,
     private val destinationDao: DestinationDao
 ) {
 
     fun registerUser(username: String, email: String, password: String) = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.register(username, email, password)
+            val bodyRequest = RegisterBodyRequest(username, email, password)
+            val response = apiService.register(bodyRequest)
             emit(Result.Success(response))
         } catch (e: HttpException) {
             val jsonString = e.response()?.errorBody()?.string()
             Log.d(TAG, "DestinationRepository: $jsonString")
-            val errorBody = Gson().fromJson(jsonString, RegisterResponse::class.java)
-            val errorMessage = errorBody.message
+            val errorBody = Gson().fromJson(jsonString, ErrorLoginRegisterResponse::class.java)
+            val errorMessage = errorBody.detail.message
             emit(Result.Error(errorMessage))
         } catch (e: Exception) {
             emit(Result.Error("Lost Connection"))
@@ -45,14 +47,16 @@ class DestinationRepository(
     fun loginUser(email: String, password: String) = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.login(email, password)
+            val bodyRequest = LoginBodyRequest(email, password)
+            val response = apiService.login(bodyRequest)
+            saveSession(UserModel(response.loginResult.username, response.loginResult.token,true))
             Log.d("LoginUser", "Response: $response")
             emit(Result.Success(response))
         } catch (e: HttpException) {
             val jsonString = e.response()?.errorBody()?.string()
             Log.d("LoginUser", "HttpException: $jsonString")
             Log.d(TAG, "DestinationRepository: $jsonString")
-            val errorBody = Gson().fromJson(jsonString, LoginErrorResponse::class.java)
+            val errorBody = Gson().fromJson(jsonString, ErrorLoginRegisterResponse::class.java)
             val errorMessage = errorBody.detail.message
             emit(Result.Error(errorMessage))
         } catch (e: Exception) {
@@ -60,20 +64,13 @@ class DestinationRepository(
         }
     }
 
-    suspend fun saveSession(userModel: UserModel) = userPreference.saveSession(userModel)
+    private suspend fun saveSession(userModel: UserModel) = session.saveSession(userModel)
 
     fun getSession(): Flow<UserModel> {
-        return userPreference.getSession()
+        return session.getSession()
     }
 
-    suspend fun logout() = userPreference.logout()
-
-    fun getThemeSetting(): Flow<Boolean> {
-        return userPreference.getThemeSetting()
-    }
-
-    suspend fun saveThemeSetting(isDarkModeActive: Boolean) =
-        userPreference.saveThemeSetting(isDarkModeActive)
+    suspend fun logout() = session.logout()
 
     fun getAllDestination() = liveData {
         emit(Result.Loading)
@@ -97,7 +94,7 @@ class DestinationRepository(
         } catch (e: HttpException) {
             val jsonString = e.response()?.errorBody()?.string()
             Log.d(TAG, "DestinationRepository: $jsonString")
-            val errorBody = Gson().fromJson(jsonString, DetailErrorResponse::class.java)
+            val errorBody = Gson().fromJson(jsonString, DestinationDetailErrorResponse::class.java)
             emit(Result.Error(errorBody.detail))
         } catch (e: Exception) {
             emit(Result.Error("Lost Connection"))
@@ -130,6 +127,13 @@ class DestinationRepository(
         }
     }
 
+    fun getThemeSetting(): Flow<Boolean> {
+        return session.getThemeSetting()
+    }
+
+    suspend fun saveThemeSetting(isDarkModeActive: Boolean) =
+        session.saveThemeSetting(isDarkModeActive)
+
     fun getIsFavorite(id: String): LiveData<Boolean> = destinationDao.isFavoriteDestination(id)
 
     companion object {
@@ -140,11 +144,11 @@ class DestinationRepository(
         private var instance: DestinationRepository? = null
         fun getInstance(
             apiService: ApiService,
-            userPreference: UserPreference,
+            session: Session,
             destinationDao: DestinationDao
         ): DestinationRepository =
             instance ?: synchronized(this){
-                instance ?: DestinationRepository(apiService, userPreference, destinationDao)
+                instance ?: DestinationRepository(apiService, session, destinationDao)
             }.also { instance = it }
     }
 

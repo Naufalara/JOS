@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 class DetailViewModel(private val destinationRepository: DestinationRepository) : ViewModel() {
 
     fun getData(id: String) = destinationRepository.getDestinationId(id)
+
     fun getIsFavorite(id: String): LiveData<Boolean> = destinationRepository.getIsFavorite(id)
 
     fun insertFavoriteDestination(favoriteDestination: FavoriteDestination){

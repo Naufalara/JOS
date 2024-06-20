@@ -27,7 +27,7 @@
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/gambar"
+            android:contentDescription="@string/image"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <TextView
@@ -40,7 +40,7 @@
             android:textStyle="bold"
             card_view:layout_constraintStart_toEndOf="@+id/img_item_photo"
             card_view:layout_constraintTop_toTopOf="@+id/img_item_photo"
-            tools:text="@string/wisata_name" />
+            tools:text="@string/destination" />
 
         <ImageView
             android:id="@+id/img_maps_icon"

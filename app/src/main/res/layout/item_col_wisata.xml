@@ -16,7 +16,7 @@
         android:id="@+id/img_item_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/gambar"
+        android:contentDescription="@string/image"
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <FrameLayout
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="@string/favorit"
+                android:contentDescription="@string/favorite"
                 android:padding="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:fontFamily="@font/inter_semibold"
-                android:text="@string/wisata_name"
+                android:text="@string/destination"
                 android:textSize="16sp" />
 
             <TextView

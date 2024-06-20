@@ -20,10 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_arrow_back_ios_24"
             app:title="@string/profile" />
     </com.google.android.material.appbar.AppBarLayout>
-
 
     <ImageView
         android:id="@+id/imageProfile"
@@ -40,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:text="@string/nama_profile"
+        android:text="@string/profile_name"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageProfile"
         app:layout_constraintStart_toEndOf="@+id/imageProfile"

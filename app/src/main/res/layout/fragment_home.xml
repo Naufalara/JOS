@@ -106,7 +106,7 @@
             android:id="@+id/tvListKosong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/list_kosong_pencarian"
+            android:text="@string/list_pencarian_kosong"
             android:textStyle="italic"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"

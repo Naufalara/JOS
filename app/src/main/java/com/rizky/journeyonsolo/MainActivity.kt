@@ -27,18 +27,20 @@ class MainActivity : AppCompatActivity() {
         if (isUserLoggedIn()) {
             navController.navigate(R.id.navigation_home)
         } else {
-            navController.navigate(R.id.loginFragment)
+            navController.navigate(R.id.onBoardingFragment)
         }
 
         navView.setupWithNavController(navController)
 
         val listener = NavController.OnDestinationChangedListener { _, destination, _ ->
             when(destination.id){
+                R.id.navigation_maps,
+                R.id.onBoardingFragment,
+                R.id.registerFragment,
+                R.id.loginFragment,
                 R.id.searchResultFragment,
                 R.id.detailFragment,
-                R.id.detailMapsFragment,
-                R.id.registerFragment,
-                R.id.loginFragment -> {
+                R.id.detailMapsFragment -> {
                     navView.visibility = View.GONE
                 } else -> navView.visibility = View.VISIBLE
             }
@@ -48,7 +50,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isUserLoggedIn(): Boolean {
-        // Replace with your actual login check logic
         return false
     }
 }

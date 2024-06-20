@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_navigation_home_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_onBoardingFragment"
+            app:destination="@id/onBoardingFragment" />
     </fragment>
 
     <fragment
@@ -38,7 +41,11 @@
         android:id="@+id/navigation_profile"
         android:name="com.rizky.journeyonsolo.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_onBoardingFragment"
+            app:destination="@id/onBoardingFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchResultFragment"
@@ -113,7 +120,10 @@
         android:label="fragment_on_boarding"
         tools:layout="@layout/fragment_on_boarding" >
         <action
-            android:id="@+id/action_onBoardingFragment_to_loginFragment2"
+            android:id="@+id/action_onBoardingFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_onBoardingFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
 

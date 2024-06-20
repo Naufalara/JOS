@@ -2,7 +2,7 @@ package com.rizky.journeyonsolo.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class DetailDestinationResponse(
+data class DestinationDetailResponse(
 
 	@field:SerializedName("place_id")
 	val placeId: String,
