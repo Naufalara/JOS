@@ -49,13 +49,13 @@
     <string name="yes">Ya</string>
     <string name="logout_successful">Berhasil Keluar</string>
     <string name="no">Tidak</string>
-    <string name="title_menu_1">Abadikan Momen</string>
-    <string name="title_menu_2">Ceritamu</string>
-    <string name="title_menu_3">Suka dan Dihargai</string>
-    <string name="title_menu_4">Interaksi Sosial Lengkap</string>
-    <string name="desc_menu_1">Bagikan momen spesial Anda melalui fitur posting foto yang sederhana dan menarik</string>
-    <string name="desc_menu_2">Jelajahi dan bagikan cerita Anda untuk terhubung dengan lebih banyak teman</string>
-    <string name="desc_menu_3">Suka kisah-kisah inspiratif dan rasakan hangatnya komunitas</string>
-    <string name="desc_menu_4">Lebih dari sekedar posting. Rasakan kedekatan dengan komunitas melalui interaksi sosial—suka dan komentar yang menghidupkan cerita Anda</string>
+    <string name="title_menu_1">Rekomendasi Destinasi</string>
+    <string name="title_menu_2">Informasi dan Visual tempat itu</string>
+    <string name="title_menu_3">Simpan destinasi favorit kamu</string>
+    <string name="title_menu_4">Peta Interaktif</string>
+    <string name="desc_menu_1">Awali petualanganmu dengan mendapatkan rekomendasi destinasi di Solo yang sesuai dengan minatmu.</string>
+    <string name="desc_menu_2">Dilengkapi dengan deskripsi lengkap yang mencakup informasi menarik serta foto untuk memberikan gambaran visual tentang tempat tersebut.</string>
+    <string name="desc_menu_3">Buatlah daftar tempat favorit Anda untuk perjalanan mendatang. Anda dapat menambah dan menyimpan tempat yang ingin Anda kunjungi dan mengaksesnya dengan mudah kapan saja.</string>
+    <string name="desc_menu_4">Manfaatkan fitur peta interaktif kami untuk mempermudah perjalanan Anda keliling Solo.</string>
     <string name="button_get_started">Mulai</string>
 </resources>

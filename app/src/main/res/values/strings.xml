@@ -48,13 +48,13 @@
     <string name="yes">Yes</string>
     <string name="logout_successful">Logout successful</string>
     <string name="no">No</string>
-    <string name="title_menu_1">Capture Moments</string>
-    <string name="title_menu_2">Your Story</string>
-    <string name="title_menu_3">Like and Appreciated</string>
-    <string name="title_menu_4">Complete Social Interaction</string>
-    <string name="desc_menu_1">Share your special moments through a simple and engaging photo posting feature</string>
-    <string name="desc_menu_2">Explore and share your stories to connect with more friends</string>
-    <string name="desc_menu_3">Like inspiring stories and feel the warmth of the community</string>
-    <string name="desc_menu_4">More than just posting. Experience closeness with the community through social interactions—likes and comments that bring your story to life</string>
+    <string name="title_menu_1">Recommendation Destinations</string>
+    <string name="title_menu_2">Information and Visual of the place</string>
+    <string name="title_menu_3">Save your favorite places</string>
+    <string name="title_menu_4">Interactive Maps</string>
+    <string name="desc_menu_1">Start your adventure by getting recommendations for destinations in Solo that suit your interests.</string>
+    <string name="desc_menu_2">Each tour comes with a complete description that includes interesting information as well as photos to give you a visual idea of the place.</string>
+    <string name="desc_menu_3">Make a list of your favorite places for your upcoming trip. You can add and save places you want to visit and easily access them at any time.</string>
+    <string name="desc_menu_4">Take advantage of our interactive map feature to make your journey around Solo easier.</string>
     <string name="button_get_started">Get Started</string>
 </resources>

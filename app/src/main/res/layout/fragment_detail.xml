@@ -134,7 +134,6 @@
                     android:layout_marginBottom="16dp"
                     android:layout_gravity="bottom"
                     android:text="@string/button_maps"
-                    android:textColor="@color/md_theme_onSurface"
                     android:textStyle="bold"/>
 
             </LinearLayout>
