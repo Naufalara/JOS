@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1034853432078",
+    "project_id": "journey-on-solo",
+    "storage_bucket": "journey-on-solo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034853432078:android:a1db64e516dc6dfc1db55f",
+        "android_client_info": {
+          "package_name": "com.jos.journeyonsolo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3iB-oPJaQfIHVeC-G80dk-Xn1BntC18U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034853432078:android:a4750ca8dee296cf1db55f",
+        "android_client_info": {
+          "package_name": "com.rizky.journeyonsolo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3iB-oPJaQfIHVeC-G80dk-Xn1BntC18U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
