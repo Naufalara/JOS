@@ -44,6 +44,11 @@ class ProfileFragment : Fragment() {
 
         setUpAction(view)
         setUpTheme()
+        setUpProfileName()
+    }
+
+    private fun setUpProfileName() {
+        binding.nameProfile.text = auth.currentUser?.email
     }
 
     private fun setUpAction(view: View){
