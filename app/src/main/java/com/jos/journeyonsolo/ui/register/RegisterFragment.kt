@@ -61,31 +61,6 @@ class RegisterFragment : Fragment() {
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             showErrorDialog()
         } else {
-//            viewModel.registerUser(username, email, password).observe(viewLifecycleOwner) {result ->
-//                if (result != null){
-//                    when (result){
-//                        is Result.Loading -> {
-//                            showLoading(true)
-//                        }
-//                        is Result.Success -> {
-//                            Toast.makeText(requireContext(), result.data.message, Toast.LENGTH_SHORT).show()
-//                            showLoading(false)
-//                            MaterialAlertDialogBuilder(requireContext())
-//                                .setTitle(resources.getString(R.string.success_register))
-//                                .setMessage(resources.getString(R.string.dialog_success_register,email))
-//                                .create()
-//                                .show()
-//
-//                        }
-//                        is Result.Error -> {
-//                            Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-//                            showErrorDataIsAlreadyTaken()
-//                            showLoading(false)
-//                        }
-//
-//                    }
-//                }
-//            }
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {

@@ -50,18 +50,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        viewModel.getSession().observe(viewLifecycleOwner){user ->
-//            user?.let {
-//                if (!it.isLogin){
-//                    val toOnBoardingFragment = HomeFragmentDirections.actionNavigationHomeToOnBoardingFragment()
-//                    val navOptions = NavOptions.Builder()
-//                        .setPopUpTo(R.id.mobile_navigation, true)
-//                        .build()
-//                    view.findNavController().navigate(toOnBoardingFragment, navOptions)
-//                }
-//            }
-//        }
-
         // Initialize the SearchBar and SearchView
         searchBar = binding.searchBar
         searchView = binding.searchView
