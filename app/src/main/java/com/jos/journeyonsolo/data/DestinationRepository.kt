@@ -7,12 +7,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
-import com.google.gson.Gson
 import com.jos.journeyonsolo.R
 import com.jos.journeyonsolo.data.local.entity.FavoriteDestination
 import com.jos.journeyonsolo.data.local.room.DestinationDao
 import com.jos.journeyonsolo.data.pref.Session
-import com.jos.journeyonsolo.data.pref.UserModel
 import com.jos.journeyonsolo.data.remote.response.DestinationDetailResponse
 import com.jos.journeyonsolo.data.remote.response.ListDestinationItem
 import kotlinx.coroutines.Dispatchers
@@ -75,11 +73,9 @@ class DestinationRepository(
      * Fungsi untuk mendapatkan resource ID gambar dari drawable berdasarkan placeId.
      */
     private fun getImageResourceId(context: Context, placeId: String): Int {
-         // Ganti dengan cara akses context yang benar
-        val resourceName = "a$placeId" // Format nama file gambar, misalnya "a1"
+        val resourceName = "a$placeId"
         val resId = context.resources.getIdentifier(resourceName, "drawable", context.packageName)
-//        Log.d("getImageResourceId", "Resource Name: $resourceName, ResId: $resId")
-        return if (resId != 0) resId else R.drawable.logojos // Placeholder jika gambar tidak ditemukan
+        return if (resId != 0) resId else R.drawable.logojos
     }
 
 
