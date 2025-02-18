@@ -130,11 +130,49 @@ class DestinationRepository(
     }
 
 
-    suspend fun searchDestination(keyword: String): List<ListDestinationItem> {
-        // Simulate search process, you can replace this with actual implementation
-//        return getAllDestination().filter { it.name.contains(keyword, ignoreCase = true)
-        return emptyList()
+    fun searchDestination(keyword: String, context: Context): LiveData<Result<List<ListDestinationItem>>> {
+        return liveData(Dispatchers.IO) {
+            emit(Result.Loading)
+            try {
+                val result = db.collection("data").get().await()
+                val response = result.documents.mapNotNull { document ->
+                    val data = document.data
+                    if (data != null) {
+                        try {
+                            val placeId = data["place_id"] as? String ?: ""
+                            val imageResId = getImageResourceId(context, placeId)
+
+                            ListDestinationItem(
+                                placeId = placeId,
+                                name = data["name"] as? String ?: "",
+                                address = data["address"] as? String ?: "",
+                                imageUrl = imageResId.toString(),
+                                rating = (data["rating"] as? Number)?.toString() ?: "",
+                                category = data["category"] as? String ?: "",
+                                reviewsCount = (data["reviews_count"] as? Number)?.toString() ?: "",
+                                lat = (data["lat"] as? Number)?.toFloat() ?: 0f,
+                                lon = (data["long"] as? Number)?.toFloat() ?: 0f,
+                                captionIdn = data["caption_idn"] as? String ?: "",
+                                captionEng = data["caption_eng"] as? String ?: ""
+                            )
+                        } catch (e: Exception) {
+                            Log.e(TAG, "Error mapping document ${document.id}: ${e.message}")
+                            null
+                        }
+                    } else {
+                        null
+                    }
+                }.filter { it.name.contains(keyword, ignoreCase = true) }
+
+                emit(Result.Success(response))
+            } catch (e: HttpException) {
+                emit(Result.Error("Response error"))
+            } catch (e: Exception) {
+                emit(Result.Error("Lost Connection"))
+            }
+        }
     }
+
 
     fun getFavoriteDestination(): LiveData<List<FavoriteDestination>> {
         return destinationDao.getFavoriteDestination()

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.search.SearchBar
 import com.google.android.material.search.SearchView
 import com.jos.journeyonsolo.adapter.DestinationAdapter
@@ -14,14 +15,12 @@ import com.jos.journeyonsolo.data.Result
 import com.jos.journeyonsolo.data.remote.response.ListDestinationItem
 import com.jos.journeyonsolo.databinding.FragmentSearchResultBinding
 import com.jos.journeyonsolo.ui.ViewModelFactory
+import kotlinx.coroutines.launch
 
 class SearchResultFragment : Fragment() {
 
     private var _binding: FragmentSearchResultBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var searchBar: SearchBar
-    private lateinit var searchView: SearchView
 
     private val viewModel by viewModels<SearchResultViewModel> {
         ViewModelFactory.getInstance(requireContext())
@@ -40,94 +39,57 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        searchBar = binding.searchBar
-        searchView = binding.searchView
         val dataName = SearchResultFragmentArgs.fromBundle(arguments as Bundle).name
 
         setupUI()
-        searchBar.setText(dataName)
-        setDataFirstWhenGetArgument(dataName)
-        getSearch()
+        binding.searchBar.setText(dataName)
+        performSearch(dataName)
+        setupSearchListener()
     }
 
-    private fun setDataFirstWhenGetArgument(text: String) {
+    private fun setupUI() {
+        binding.rvResult.adapter = destinationAdapter
+        binding.searchView.setupWithSearchBar(binding.searchBar)
+    }
 
-        viewModel.searchDestination(text)
+    private fun setupSearchListener() {
+        binding.searchView.editText.setOnEditorActionListener { textView, _, _ ->
+            val query = textView.text.toString().trim()
+            binding.searchBar.setText(query)
+            performSearch(query)
+            binding.searchView.hide()
+            false
+        }
+    }
+
+    private fun performSearch(query: String) {
+        viewModel.searchDestination(query, requireContext())
+        observeSearchResult()
+    }
+
+    private fun observeSearchResult() {
+        viewModel.searchResult.removeObservers(viewLifecycleOwner)
         viewModel.searchResult.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is Result.Loading -> {
-                    showLoading(true)
-                }
-
+                is Result.Loading -> showLoading(true)
                 is Result.Success -> {
                     showLoading(false)
-                    val newData = result.data
-                    if (newData.isNotEmpty()) {
-                        showDataNull(false)
-                        setListDestination(newData)
-                    } else {
-                        setListDestination(emptyList())
-                        showDataNull(true)
-                    }
+                    updateDestinationList(result.data)
                 }
-
                 is Result.Error -> {
                     showLoading(false)
-                    Toast.makeText(
-                        requireContext(),
-                        "Terjadi kesalahan " + result.error,
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showToast(result.error)
                 }
             }
         }
     }
 
-
-    private fun getSearch() {
-        this.searchView.setupWithSearchBar(this.searchBar)
-        searchView
-            .editText
-            .setOnEditorActionListener { textView, _, _ ->
-                searchBar.setText(textView.text)
-                viewModel.searchDestination(textView.text.toString())
-                viewModel.searchResult.observe(viewLifecycleOwner) { result ->
-                    when (result) {
-                        is Result.Loading -> {
-                            showLoading(true)
-                        }
-
-                        is Result.Success -> {
-                            showLoading(false)
-                            val newData = result.data
-                            if (newData.isNotEmpty()) {
-                                showDataNull(false)
-                                setListDestination(newData)
-                            } else {
-                                setListDestination(emptyList())
-                                showDataNull(true)
-                            }
-                        }
-
-                        is Result.Error -> {
-                            showLoading(false)
-                            Toast.makeText(
-                                requireContext(),
-                                "Terjadi kesalahan " + result.error,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-                }
-                searchView.hide()
-                false
-            }
-    }
-
-    private fun setupUI() {
-        binding.apply {
-            searchView.setupWithSearchBar(searchBar)
-            rvResult.adapter = destinationAdapter
+    private fun updateDestinationList(data: List<ListDestinationItem>) {
+        if (data.isEmpty()) {
+            showDataNull(true)
+        } else {
+            showDataNull(false)
+            destinationAdapter.submitList(data)
         }
     }
 
@@ -139,13 +101,12 @@ class SearchResultFragment : Fragment() {
         binding.tvListKosong.visibility = if (isDataNull) View.VISIBLE else View.GONE
     }
 
-    private fun setListDestination(newData: List<ListDestinationItem>) {
-        destinationAdapter.submitList(newData)
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), "Terjadi kesalahan: $message", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
-
 }

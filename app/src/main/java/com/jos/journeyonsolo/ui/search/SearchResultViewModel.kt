@@ -1,5 +1,6 @@
 package com.jos.journeyonsolo.ui.search
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,12 +15,13 @@ class SearchResultViewModel(private val destinationRepository: DestinationReposi
     private val _searchResult = MutableLiveData<Result<List<ListDestinationItem>>>()
     val searchResult: LiveData<Result<List<ListDestinationItem>>> = _searchResult
 
-    fun searchDestination(keyword: String) {
+    fun searchDestination(keyword: String, context: Context) {
         viewModelScope.launch {
             _searchResult.value = Result.Loading
             try {
-                val result = destinationRepository.searchDestination(keyword)
-                _searchResult.value = Result.Success(result)
+                destinationRepository.searchDestination(keyword, context).observeForever { result ->
+                    _searchResult.value = result
+                }
             } catch (e: Exception) {
                 _searchResult.value = Result.Error(e.message.toString())
             }
