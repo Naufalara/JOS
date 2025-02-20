@@ -79,7 +79,7 @@ class DestinationRepository(
     }
 
 
-    fun getDestinationId(id: String) = liveData {
+    fun getDestinationId(id: String, context: Context) = liveData {
         emit(Result.Loading)
         try {
             val result = db.collection("data").whereEqualTo("place_id", id).get().await()
@@ -92,11 +92,14 @@ class DestinationRepository(
                 // Mapping dokumen ke DestinationDetailResponse
                 if (data != null) {
                     try {
+                        val placeId = data["place_id"] as? String ?: ""
+                        val imageResId = getImageResourceId(context,placeId)
+
                         val response = DestinationDetailResponse(
-                            placeId = data["place_id"] as? String ?: "",
+                            placeId = placeId,
                             name = data["name"] as? String ?: "",
                             address = data["address"] as? String ?: "",
-                            imageUrl = data["image_url"] as? String ?: "a",
+                            imageUrl = imageResId.toString(),
                             rating = (data["rating"] as? Number)?.toString() ?: "",
                             category = data["category"] as? String ?: "",
                             reviewsCount = (data["reviews_count"] as? Number)?.toString() ?: "",

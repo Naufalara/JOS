@@ -1,5 +1,6 @@
 package com.jos.journeyonsolo.ui.detail
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class DetailViewModel(private val destinationRepository: DestinationRepository) : ViewModel() {
 
-    fun getData(id: String) = destinationRepository.getDestinationId(id)
+    fun getData(id: String,context: Context) = destinationRepository.getDestinationId(id,context)
 
     fun getIsFavorite(id: String): LiveData<Boolean> = destinationRepository.getIsFavorite(id)
 

@@ -47,7 +47,7 @@ class DetailFragment : Fragment() {
         }
 
         // Mengamati data dari ViewModel
-        viewModel.getData(id).observe(viewLifecycleOwner) { result ->
+        viewModel.getData(id,requireContext()).observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
                     showLoading(true) // Menampilkan loading indicator
@@ -67,7 +67,7 @@ class DetailFragment : Fragment() {
                     // Mengisi UI dengan data yang diterima
                     binding.tvItemName.text = newData.name
                     Glide.with(requireContext())
-                        .load(newData.imageUrl)
+                        .load(newData.imageUrl.toIntOrNull())
                         .into(binding.imgItemPhoto)
                     binding.tvItemLocation.text = newData.address
                     binding.tvItemRating.text = newData.rating
